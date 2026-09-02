@@ -1,6 +1,6 @@
 # GRT Transit Data Pipeline
 
-> **Note:** This project is currently a work in progress.
+> **Note:** This project is currently a WORK IN PROGRESS!
 
 This project builds a local data pipeline to collect, decode, and analyze real-time GTFS (General Transit Feed Specification) data for Grand River Transit (GRT).
 
