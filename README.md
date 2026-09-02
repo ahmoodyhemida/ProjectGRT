@@ -6,7 +6,7 @@ This project builds a local data pipeline to collect, decode, and analyze real-t
 
 > All commands should be run from the root of the project directory.
 
-## Quick Start
+## How to Reproduce
 
 1. **Install dependencies**
 
