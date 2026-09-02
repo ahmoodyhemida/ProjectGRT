@@ -1,0 +1,14 @@
+venv/
+.venv/
+env/
+.env/
+.vscode/
+.idea/
+.DS_Store
+__pycache__/
+
+pipeline.txt
+
+/GRT_GTFS/Trip_Updates
+/GRT_GTFS/Static_Feed
+/GRT_GTFS/Trip_Updates_Static_Feed.db

@@ -1,0 +1,8 @@
+Requests==2.34.2
+protobuf==7.36.1
+gtfs-realtime-bindings
+pandas
+matplotlib
+seaborn
+jupysql
+SQLAlchemy
