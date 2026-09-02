@@ -33,7 +33,7 @@ This project builds a local data pipeline to collect, decode, and analyze real-t
     pip install -r requirements.txt
    ```
 
-   Then install the required packages:
+   Then, install the required packages:
 
    ```bash
    pip install -r requirements.txt
