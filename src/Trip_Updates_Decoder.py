@@ -4,7 +4,7 @@ from pathlib import Path
 from google.transit import gtfs_realtime_pb2
 
 TRIP_UPDATES_FOLDER = Path("GRT_GTFS/Trip_Updates")
-db_filepath = 'Trip_Updates_Static_Feed.db'
+db_filepath = Path("GRT_GTFS/Trip_Updates_Static_Feed.db")
 
 def process_full_trip_updates(pb_filepath, db_filepath):
     filename = os.path.basename(pb_filepath)
@@ -15,7 +15,7 @@ def process_full_trip_updates(pb_filepath, db_filepath):
     cursor = conn.cursor()
     
     cursor.executescript('''
-        CREATE TABLE IF NOT EXISTS feed_header (
+        CREATE TABLE IF NOT EXISTS feed_header_update (
             fetched_at TEXT UNIQUE,
             gtfs_realtime_version TEXT,
             incrementality INTEGER,
@@ -94,7 +94,7 @@ def process_full_trip_updates(pb_filepath, db_filepath):
         feed.ParseFromString(f.read())
 
     cursor.execute('''
-        INSERT OR IGNORE INTO feed_header (fetched_at, gtfs_realtime_version, incrementality, timestamp, feed_version)
+        INSERT OR IGNORE INTO feed_header_update (fetched_at, gtfs_realtime_version, incrementality, timestamp, feed_version)
         VALUES (?, ?, ?, ?, ?)
     ''', (
         fetched_at,
@@ -196,10 +196,11 @@ def process_full_trip_updates(pb_filepath, db_filepath):
 
 pb_files = sorted(TRIP_UPDATES_FOLDER.glob("*.pb"))
 
-print(f"Found {len(pb_files)} files to process.")
-
 for pb_filepath in pb_files:
     print(f"Processing: {pb_filepath.name}")
-    process_full_trip_updates(pb_filepath, db_filepath)
+    try:
+        process_full_trip_updates(pb_filepath, db_filepath)
+    except Exception as error:
+        print(f"Error: {error}")
 
 print("Done.")

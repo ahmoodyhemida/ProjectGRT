@@ -39,7 +39,7 @@ try:
         try:
             download_snapshot(session)
         except requests.RequestException as error:
-            print(f"Download failed: {error}")
+            print(f"Error: {error}")
 
         time.sleep(INTERVAL_SECONDS)
 

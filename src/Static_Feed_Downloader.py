@@ -21,4 +21,4 @@ try:
     print(f"Successfully extracted files to: {RAW_FOLDER}")
 
 except urllib.error.URLError as error:
-    print(f"Download failed: {error}")
+    print(f"Error: {error}")
