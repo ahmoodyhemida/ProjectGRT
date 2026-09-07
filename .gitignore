@@ -8,6 +8,7 @@ env/
 __pycache__/
 
 pipeline.txt
+.ipynb_checkpoints/
 
 /GRT_GTFS/Trip_Updates
 /GRT_GTFS/Static_Feed

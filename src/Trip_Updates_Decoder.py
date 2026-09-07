@@ -16,11 +16,12 @@ def process_full_trip_updates(pb_filepath, db_filepath):
     
     cursor.executescript('''
         CREATE TABLE IF NOT EXISTS feed_header (
-            fetched_at TEXT,
+            fetched_at TEXT UNIQUE,
             gtfs_realtime_version TEXT,
             incrementality INTEGER,
             timestamp INTEGER,
             feed_version TEXT
+
         );
 
         CREATE TABLE IF NOT EXISTS trip_update (
@@ -83,7 +84,8 @@ def process_full_trip_updates(pb_filepath, db_filepath):
             prop_pickup_type INTEGER,
             prop_drop_off_type INTEGER,
 
-            FOREIGN KEY(trip_entity_id, fetched_at) REFERENCES trip_update(entity_id, fetched_at)
+            FOREIGN KEY(trip_entity_id, fetched_at) REFERENCES trip_update(entity_id, fetched_at),
+            UNIQUE (trip_entity_id, stop_sequence, fetched_at)
         );
     ''')
 
@@ -92,7 +94,7 @@ def process_full_trip_updates(pb_filepath, db_filepath):
         feed.ParseFromString(f.read())
 
     cursor.execute('''
-        INSERT INTO feed_header (fetched_at, gtfs_realtime_version, incrementality, timestamp, feed_version)
+        INSERT OR IGNORE INTO feed_header (fetched_at, gtfs_realtime_version, incrementality, timestamp, feed_version)
         VALUES (?, ?, ?, ?, ?)
     ''', (
         fetched_at,
@@ -157,7 +159,7 @@ def process_full_trip_updates(pb_filepath, db_filepath):
             st_prop = stu.stop_time_properties if stu.HasField('stop_time_properties') else None
 
             cursor.execute('''
-                INSERT INTO stop_time_update (
+                INSERT OR IGNORE INTO stop_time_update (
                     fetched_at, trip_entity_id, stop_sequence, stop_id,
                     arrival_delay, arrival_time, arrival_uncertainty, arrival_scheduled_time,
                     departure_delay, departure_time, departure_uncertainty, departure_scheduled_time,
