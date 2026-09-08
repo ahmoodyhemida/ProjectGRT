@@ -65,4 +65,6 @@ This project builds a local data pipeline to collect, decode, and analyze real-t
 
 5. **Run the analysis**
 
-   Open `notebook.ipynb` to run the Python/Pandas SQL queries and view the data visualizations. Click 'Run All' or run individual cells, once each, in order. 
+   Open `notebook.ipynb` to run the Python/Pandas SQL queries and view the data visualizations. Click 'Run All'.
+
+## The Analysis
