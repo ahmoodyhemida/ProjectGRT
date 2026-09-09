@@ -13,3 +13,5 @@ pipeline.txt
 /GRT_GTFS/Trip_Updates
 /GRT_GTFS/Static_Feed
 /GRT_GTFS/Trip_Updates_Static_Feed.db
+/GRT_GTFS/Trip_Updates_Static_Feed.db-wal
+/GRT_GTFS/Trip_Updates_Static_Feed.db-shm
